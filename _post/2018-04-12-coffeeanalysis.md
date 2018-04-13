@@ -15,7 +15,7 @@ excerpt: "Data Visualizing the Ambiance of Coffee"
 
 Basic text.
 
-some *icalics*
+some *italics*
 
 some **bold**
 
