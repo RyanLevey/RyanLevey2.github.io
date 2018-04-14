@@ -200,40 +200,17 @@ plt.title('Coffee Purchased(Product Value) & Temperature(Feels Like C)')
 
 ```
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/CoffePurchasedTempLin.JPG" alt="Final Data Frame For Coffee"> <img src="{{ site.url }}{{ site.baseurl }}/images/CoffeePurchasedCloudCoverageLin.JPG" alt="Final Data Frame For Coffee">
+<img src="{{ site.url }}{{ site.baseurl }}/images/CoffePurchasedTempLin.JPG" alt="Final Data Frame For Coffee">
 
 
 For cloud coverage:
 
 <img src="{{ site.url }}{{ site.baseurl }}/images/CoffeePurchasedCloudCoverageLin.JPG" alt="Final Data Frame For Coffee">
 
-## H2 Heading
+Indeed we can see the regresional relationship between the two variables. However, due to the high varience of the data, using a linear method to draw observations from the data is not effective. With that being said, we need to observe the characteristic of every data point within the data. If we can identify what makes each data point particular, we can then group them and from the groupings we can then draw more a more effective analysis.
 
-### H3 Heading
+## Second: Plot the data by group
 
-Basic text.
+By plotting each data point, or day by weather type, we can have a better illustration to see how it behaves. As shown, consumers tend to spend more on coffee when it is cold/cloudy versus when it is warm.
 
-some *italics*
-
-some **bold**
-
-A [link](https:jffj)
-
-Bulleted list:
-* First
-+ Second
-- Third
-
-Numbered list:
-1. First
-2. Second
-3. Third
-
-Python code block:
-```python
-    import numpy as np
-
-    def test_function(x,y):
-      z = np.sum(x,y)
-      return z
-```
+<img src="{{ site.url }}{{ site.baseurl }}/images/ClusterWeatherCoffee.JPG" alt="Final Data Frame For Coffee">
