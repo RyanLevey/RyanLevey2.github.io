@@ -132,7 +132,7 @@ rFinalCoffee.head()
 
 ```
 
-Final Data Frame for Coffee 
+Final Data Frame for Coffee
 <img src="{{ site.url }}{{ site.baseurl }}/images/rFinalCoffeedf.JPG" alt="Final Data Frame For Coffee">
 
 ## Third: Put the Weather and Total Coffee data together(and drop holidays)
@@ -186,6 +186,25 @@ final.weather[final.weather==4]= 'mild & cloudy'
 
 After cleaning/manipulating the data, it is possible to dive in to the analysis and identify potential consumer behaviors in relation to the weather.
 
+## First: Conduct a Linear analysis
+
+By doing a linear analysis, we are able to identify a correlation between two variables. In this case, it will be with total value of coffee along with temperature (feelsLikeC) and cloud coverage (cloudcover)
+
+By using the seaborn library for visualization, we get the following results below.
+
+```python
+sb.pairplot(final, x_vars=['feelsLikeC'], y_vars='t_total_product_value', size=7,
+            aspect=0.7, kind='reg' )
+plt.title('Coffee Purchased(Product Value) & Temperature(Feels Like C)')
+
+
+```
+
+<img src="{{ site.url }}{{ site.baseurl }}/images/CoffePurchasedTempLin.JPG" alt="Final Data Frame For Coffee">
+
+For cloud coverage:
+
+<img src="{{ site.url }}{{ site.baseurl }}/images/CoffeePurchasedCloudCoverageLin.JPG" alt="Final Data Frame For Coffee">
 
 ## H2 Heading
 
