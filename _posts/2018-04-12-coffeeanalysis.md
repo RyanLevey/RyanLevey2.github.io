@@ -132,7 +132,7 @@ rFinalCoffee.head()
 
 ```
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/rFinalCoffee df.jpg" alt="Final Data Frame For Coffee">
+<img src="{{ site.url }}{{ site.baseurl }}/images/rFinalCoffeedf.JPG" alt="Final Data Frame For Coffee">
 
 ## Third: Put the Weather and Total Coffee data together(and drop holidays)
 
