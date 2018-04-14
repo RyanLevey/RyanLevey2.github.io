@@ -63,7 +63,7 @@ After importing the libraries, data, and understanding the significance of the f
 
 Since the two data sets have a common feature of the date, it is possible to utilize it for our index in order to better organize & align the two data sets.
 
-However, as seen above, the dates are not in order. In order to counter this, the pd.to_datetime fucntion was used to convert the "date" column to the datetime format (so python can understand) and ordered by .sort_values function. This way, All the dates are in order.
+However, as seen above, the dates are not in order. In order to counter this, the pd.to_datetime function was used to convert the "date" column to the datetime format (so python can understand) and ordered by .sort_values function. This way, All the dates are in order. Please note the same code was used for the weather_1 dataset as well.
 
 ```python
     retail['date'] = pd.to_datetime(retail['date'])
@@ -72,6 +72,78 @@ However, as seen above, the dates are not in order. In order to counter this, th
     retail = retail[retail['location']] == 'Utrecht'
 
 ```
+By converting/ordering the dates, we can use the date as an index to provide better organization. However, there are more observations (rows) within the weather_1 data set versus the retail. In this case, we don't need all of the weather data, we just need the weather data from dates September 10th (2017-09-10) to March 1st (2018-03-01).
+
+```python
+    weather_1U_retail = weather_1U_retail.loc['2017-09-10':'2018-08-01',:]
+    weather_1U_retail.head()
+
+
+```
+<img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
+
+Now the two data frames span within the same dates. It is possible to continue to clean the retail data frame. The reason why this needs clean is because within the column "names", we have expensive, and average coffee that we are observing. With that being said, we need to put the two together and make a new data frame from it.
+
+1. Make two data frames for Expensive, and Average coffee. Then drop columns not being used
+
+```python
+# Put Average and Expensive coffee together in effort to understandthe total amount of coffee being consumed.
+
+retail_ECoffee = retail[retail['name'] == 'Expensive coffee' ]
+retail_ACoffee = retail[retail['name'] == 'Average coffee' ]
+###### Edit the data frame
+retail_ECoffee = retail_ECoffee.drop('_id__$oid',1)
+retail_ECoffee = retail_ECoffee.drop('name',1)
+retail_ECoffee = retail_ECoffee.drop('location',1)
+retail_ACoffee = retail_ACoffee.drop('_id__$oid',1)
+retail_ACoffee = retail_ACoffee.drop('name',1)
+retail_ACoffee = retail_ACoffee.drop('location',1)
+
+retail_ECoffee = retail_ECoffee.rename(columns={'total_transactions':'E_total_transactions,',
+                                           'appearances': 'E_appearances',
+                                           'total_transaction_value': 'E_total_transaction_value',
+                                           'total_product_value':'E_product_value'})
+
+retail_ACoffee = retail_ACoffee.rename(columns={'total_transactions':'A_total_transactions,',
+                                           'appearances': 'A_appearances',
+                                           'total_transaction_value': 'A_total_transaction_value',
+                                           'total_product_value':'A_product_value'})
+
+# Put the two data frames together
+rTotalCoffee = retail_ECoffee.join(retail_ACoffee, how='outer')
+
+
+rTotalCoffee.head()
+
+
+```
+
+2. From the new data frame (rTotalCoffee), Make three columns for total transactions, appearances, transaction value, and total product value. Then drop Expensive and Average coffee columns
+
+```python
+rTotalCoffee['t_total_transaction'] = rTotalCoffee['E_total_transactions,'] + rTotalCoffee['A_total_transactions,']
+rTotalCoffee['t_appearances'] = rTotalCoffee['E_appearances'] + rTotalCoffee['A_appearances']
+rTotalCoffee['t_total_transaction_value'] = rTotalCoffee['E_total_transaction_value'] + rTotalCoffee['A_total_transaction_value']
+rTotalCoffee['t_total_product_value'] = rTotalCoffee['E_product_value'] + rTotalCoffee['E_product_value']
+
+rFinalCoffee = rTotalCoffee.drop(rTotalCoffee.columns[[0, 1, 2, 3, 4, 5, 6, 7]], axis=1)
+
+rFinalCoffee.head()
+
+```
+
+<img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
+
+3. Put the Weather and Total Coffee data together(and drop holidays)
+
+```python
+final = weather_1U_retail.join(rFinalCoffee, how='outer')
+final.dropna(how='any')
+
+```
+
+
+
 
 
 ## H2 Heading
