@@ -200,7 +200,8 @@ plt.title('Coffee Purchased(Product Value) & Temperature(Feels Like C)')
 
 ```
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/CoffePurchasedTempLin.JPG" alt="Final Data Frame For Coffee">
+<img src="{{ site.url }}{{ site.baseurl }}/images/CoffePurchasedTempLin.JPG" alt="Final Data Frame For Coffee"> <img src="{{ site.url }}{{ site.baseurl }}/images/CoffeePurchasedCloudCoverageLin.JPG" alt="Final Data Frame For Coffee">
+
 
 For cloud coverage:
 
