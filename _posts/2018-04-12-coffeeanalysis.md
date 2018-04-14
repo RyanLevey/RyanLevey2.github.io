@@ -132,7 +132,7 @@ rFinalCoffee.head()
 
 ```
 
-<img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/images/rFinalCoffee df.jpg" alt="Final Data Frame For Coffee">
 
 ## Third: Put the Weather and Total Coffee data together(and drop holidays)
 
@@ -183,7 +183,7 @@ final.weather[final.weather==4]= 'mild & cloudy'
 ```
 # Step 3: Begin the analysis
 
-After cleaning/manipulating the data, it is possible to dive in to the analysis and identify potential consumer behaviors in relation to the weather. 
+After cleaning/manipulating the data, it is possible to dive in to the analysis and identify potential consumer behaviors in relation to the weather.
 
 
 ## H2 Heading
