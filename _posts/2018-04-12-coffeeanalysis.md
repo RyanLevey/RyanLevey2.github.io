@@ -141,7 +141,27 @@ final = weather_1U_retail.join(rFinalCoffee, how='outer')
 final.dropna(how='any')
 
 ```
+Now that the data is clean, we can manipulate it to understand what the weather was like for the given set of days. More specifically, we need to manipulate the data in such a manner that Python can understand if it was a warm/cold day or a clear/cloudy day. We can do this by creating four new columns (coldclear, coldcloudy, mildclear, mildcloudy) and give boolean values on each column based on the conditions of the feelsLikeC, and cloudcover columns.
 
+Note: The reason why I used feelsLikeC for temperature is because for this analysis we want to understand what consumers are experiencing. The feelsLikeC temperature can better illustrate the overall experience and ambiance that consumers are experiencing. I also took cloudcover into consideration as well because it adds to the ambiance effect that I was trying to illustrate within my analysis.
+
+```python
+#Create Dummy Variables for in order to provide classification
+
+final['coldclear'] = (final['feelsLikeC'] <= 9) & (final['cloudcover'] <= 49)
+final['coldcloudy'] = (final['feelsLikeC'] <= 9) & (final['cloudcover'] >= 50)
+final['mildclear'] = (final['feelsLikeC'] >= 10) & (final['cloudcover'] <= 49)
+final['mildcloudy'] = (final['feelsLikeC'] >= 10) & (final['cloudcover'] >= 50)
+
+#Convert to boolean values to int
+
+final.coldclear = final.coldclear.astype(int)
+final.coldcloudy = final.coldcloudy.astype(int)
+final.mildclear = final.mildclear.astype(int)
+final.mildcloudy = final.mildcloudy.astype(int)
+
+```
+<img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
 
 
 
