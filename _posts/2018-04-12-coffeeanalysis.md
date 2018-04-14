@@ -35,21 +35,24 @@ And for the data files:
 
 ```
 
-Preview for weather:
+### Preview for weather:
+
+
+
 
 ```python
     weather_1.head()
 
 ```
-<img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/images/weather_1head.JPG" alt="Final Data Frame For Coffee">
 
-Preview for retail sales:
+### Preview for retail sales:
 
 ```python
     retail.head()
 
 ```
-<img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/images/retailhead.JPG" alt="Final Data Frame For Coffee">
 
 Now we know what features are present within the two data sets, it is also importing to understand the significants of them as well (specifically for the retail data):
 * total_transactions: The total transactions made within that day.
