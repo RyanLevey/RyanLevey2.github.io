@@ -84,7 +84,7 @@ By converting/ordering the dates, we can use the date as an index to provide bet
 
 Now the two data frames span within the same dates. It is possible to continue to clean the retail data frame. The reason why this needs clean is because within the column "names", we have expensive, and average coffee that we are observing. With that being said, we need to put the two together and make a new data frame from it.
 
-1. Make two data frames for Expensive, and Average coffee. Then drop columns not being used
+## First: Make two data frames for Expensive, and Average coffee. Then drop columns not being used
 
 ```python
 # Put Average and Expensive coffee together in effort to understandthe total amount of coffee being consumed.
@@ -118,7 +118,7 @@ rTotalCoffee.head()
 
 ```
 
-2. From the new data frame (rTotalCoffee), Make three columns for total transactions, appearances, transaction value, and total product value. Then drop Expensive and Average coffee columns
+## Second: From the new data frame (rTotalCoffee), Make three columns for total transactions, appearances, transaction value, and total product value. Then drop Expensive and Average coffee columns
 
 ```python
 rTotalCoffee['t_total_transaction'] = rTotalCoffee['E_total_transactions,'] + rTotalCoffee['A_total_transactions,']
@@ -134,7 +134,7 @@ rFinalCoffee.head()
 
 <img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
 
-3. Put the Weather and Total Coffee data together(and drop holidays)
+## Third: Put the Weather and Total Coffee data together(and drop holidays)
 
 ```python
 final = weather_1U_retail.join(rFinalCoffee, how='outer')
@@ -163,7 +163,27 @@ final.mildcloudy = final.mildcloudy.astype(int)
 ```
 <img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
 
+The next objective combine the four weather types columns into a single column. To do so, each weather type needs to be assinged to an integer. For example, cold & clear weather will be assinged to 1 and cold & cloudy will be assinged to 2.
 
+```python
+
+#Differentiate Boolean values
+inal.coldcloudy[final.coldcloudy>0]+=1
+final.mildclear[final.mildclear>0]+=2
+final.mildcloudy[final.mildcloudy>0]+=3
+
+final['weather'] = final['coldclear'] + final['coldcloudy'] + final['mildclear'] + final['mildcloudy']
+
+#Assing integers to string value
+final.weather[final.weather==1] = 'cold & clear'
+final.weather[final.weather==2]= 'cold & cloudy'
+final.weather[final.weather==3]= 'mild & clear'
+final.weather[final.weather==4]= 'mild & cloudy'
+
+```
+# Step 3: Begin the analysis
+
+After cleaning/manipulating the data, it is possible to dive in to the analysis and identify potential consumer behaviors in relation to the weather. 
 
 
 ## H2 Heading
