@@ -9,13 +9,13 @@ excerpt: "The Relationship between weather and value of coffee purchased"
 
 # Company Profile: Suburbia
 
-Suburbia is a start up based in Amsterdam that utilizes data from a variety of source in order to develop rich insights for decision makers and investors. For example, instead of using traditional sources such as government/industrial reports, and stock prices, Suburbia uses data from sources such as sensor data from IOT (Internet of Things) devices, and POS (Point of Sale) data from Retail.
+Suburbia is a start up based in Amsterdam that utilizes data from a variety of sources in effort to generate better insights for decision makers. Instead of using traditional sources such as industrial reports, and stock prices, Suburbia uses data from sources such as point of sale (POS), real estate, and a variety of other sources depending on the situation at hand.
 
-For my assessment, I was given data from sources such as the weather, retail sales (for multiple goods), housing prices in The Netherlands, and stock prices. I was asked to conduct an analysis of all of this data and develop a common theme.
+For this assignment, the task was to develop an analysis for coffee sales (total product value sold) within the Utrecht area. The analysis could be conducted by comparing a variety of data relative to the euro amount of coffee sales. Because of the nature in the way coffee is marketed, companies are not only selling the coffee itself, but the ambiance associated with it. In effort to demonstrate this ambiance, coffee analyzed with the weather in the Utrecht.
 
 # Step 1: Analyze/Import the Data  
 
-As with the begining of every analysis, the first step is to import the Python libraries and data in order to have a quick analysis of it. This is in effort to become more familiar with the data and understand what features I am working with.
+For the analysis, Python along with its variety of libraries (as seen below) were used. With that being said, the following Python libraries were imported:
 
 ```python
     import pandas as pd
@@ -27,13 +27,16 @@ As with the begining of every analysis, the first step is to import the Python l
     %matplotlib inline
 
 ```
-And for the data files:
+Along with the data files:
 
 ```python
     weather_1 = pd.read_csv('...File Path...', delimiter = ',', encoding = 'utf-8-sig')
     retail = pd.read_csv('...File Path...', delimiter=',', encoding = 'utf-8-sig')
 
 ```
+
+The .head() function was used to preview the data in effort to become familiar with the data features (aka: columns)
+
 
 ### Preview for weather:
 
@@ -54,7 +57,8 @@ And for the data files:
 ```
 <img src="{{ site.url }}{{ site.baseurl }}/images/retailhead.JPG" alt="Final Data Frame For Coffee">
 
-Now we know what features are present within the two data sets, it is also importing to understand the significants of them as well (specifically for the retail data):
+After illustrating the features of the two data sets, it is then possible to identify which features are significant for the analysis and which are not. In this case, the most significant features are:
+
 * total_transactions: The total transactions made within that day.
 * appearances: The number of times the said good "name" appeared on the POS (Point of Sale).
 * total_transaction_value: The total "Basket of Goods" bought on that day.
@@ -64,9 +68,9 @@ After importing the libraries, data, and understanding the significance of the f
 
 # Step 2: Cleaning/Manipulating the Data
 
-Since the two data sets have a common feature of the date, it is possible to utilize it for our index in order to better organize & align the two data sets.
+In order to analyze the two data frames, the two need to be aligned (aka: indexed) to provide better organization and transparency. Essentially, indexing the two data frames results in organizing the two data frames by a common feature (in this case dates).
 
-However, as seen above, the dates are not in order. In order to counter this, the pd.to_datetime function was used to convert the "date" column to the datetime format (so python can understand) and ordered by .sort_values function. This way, All the dates are in order. Please note the same code was used for the weather_1 dataset as well.
+As seen above, the date feature (column) for both data frames are not organized in any order. In order to organize the two, the pd.to_datetime function was used to convert the dates into datetime format and ordered by the .sort_values function.
 
 ```python
     retail['date'] = pd.to_datetime(retail['date'])
@@ -75,7 +79,7 @@ However, as seen above, the dates are not in order. In order to counter this, th
     retail = retail[retail['location']] == 'Utrecht'
 
 ```
-By converting/ordering the dates, we can use the date as an index to provide better organization. However, there are more observations (rows) within the weather_1 data set versus the retail. In this case, we don't need all of the weather data, we just need the weather data from dates September 10th (2017-09-10) to March 1st (2018-03-01).
+After the data is sorted and organized, another element to be address is the high number of observations (rows) within the weather data set. Because we only have data from September 10th 2017 to March 1st 2017, the .loc function is used to filter weather dates within the timeline that we have for retail
 
 ```python
     weather_1U_retail = weather_1U_retail.loc['2017-09-10':'2018-08-01',:]
@@ -83,9 +87,10 @@ By converting/ordering the dates, we can use the date as an index to provide bet
 
 
 ```
-<img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
+### Weather Data Frame (Organized by date)
+<img src="{{ site.url }}{{ site.baseurl }}/images/weather_1Uloc.JPG" alt="">
 
-Now the two data frames span within the same dates. It is possible to continue to clean the retail data frame. The reason why this needs clean is because within the column "names", we have expensive, and average coffee that we are observing. With that being said, we need to put the two together and make a new data frame from it.
+Since the two data frames are aligned, it is now possible to clean the retail data frame in further detail. As seen above, there are two types of coffees that are being observed, Expensive and Average coffee. Because this analysis involves coffee in relation to the weather, we must put the two observations (Expensive and  average coffee) together.
 
 ## First: Make two data frames for Expensive, and Average coffee. Then drop columns not being used
 
@@ -145,9 +150,9 @@ final = weather_1U_retail.join(rFinalCoffee, how='outer')
 final.dropna(how='any')
 
 ```
-Now that the data is clean, we can manipulate it to understand what the weather was like for the given set of days. More specifically, we need to manipulate the data in such a manner that Python can understand if it was a warm/cold day or a clear/cloudy day. We can do this by creating four new columns (coldclear, coldcloudy, mildclear, mildcloudy) and give boolean values on each column based on the conditions of the feelsLikeC, and cloudcover columns.
+With the clean data, it is possible to further manipulate the data to illustrate what weather consumers experienced on a particular day. More specifically, a logic needs to be develop in order to define what is a cold/mild day or a clear/cloudy day. This can be conducted by generating four new columns (coldclear, coldcloudy, mildclear, mildcloudy) which Boolean values (True/False, 1 and 0) are assigned in each column based upon the conditions of other features such as feelsLikeC and cloud cover.
 
-Note: The reason why I used feelsLikeC for temperature is because for this analysis we want to understand what consumers are experiencing. The feelsLikeC temperature can better illustrate the overall experience and ambiance that consumers are experiencing. I also took cloudcover into consideration as well because it adds to the ambiance effect that I was trying to illustrate within my analysis.
+In effort to effectively illustrate the “ambiance” that the consumer was experiencing, the feelsLikeC and cloudcover features (columns) were used. Yet again, the goal of this analysis is to determine what experience (ambiance) that encourages consumers to spend money on coffee.
 
 ```python
 #Create Dummy Variables for in order to provide classification
@@ -165,9 +170,10 @@ final.mildclear = final.mildclear.astype(int)
 final.mildcloudy = final.mildcloudy.astype(int)
 
 ```
-<img src={{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">
+### Dummy Variables
+<img src="{{ site.url }}{{ site.baseurl }}/images/weather_1Uloc.JPG" alt="">
 
-The next objective combine the four weather types columns into a single column. To do so, each weather type needs to be assinged to an integer. For example, cold & clear weather will be assinged to 1 and cold & cloudy will be assinged to 2.
+Lastly, the next objective is to combine the four weather columns into a single column. To do so, the Boolean values must be differentiated. This was done by assigning different integers to different types of weather. After assigning each weather type an integer, all features (columns) were added to the weather column and converted to strings for transparency.
 
 ```python
 
@@ -185,15 +191,16 @@ final.weather[final.weather==3]= 'mild & clear'
 final.weather[final.weather==4]= 'mild & cloudy'
 
 ```
+### Final Data Frame for Analysis
+<img src="{{ site.url }}{{ site.baseurl }}/images/finaldf.JPG" alt="">
+
 # Step 3: Begin the analysis
 
-After cleaning/manipulating the data, it is possible to dive in to the analysis and identify potential consumer behaviors in relation to the weather.
+After cleaning/manipulating the data, it is possible to identify potential consumer behaviors in relation to the weather.
 
 ## First: Conduct a Linear analysis
 
-By doing a linear analysis, we are able to identify a correlation between two variables. In this case, it will be with total value of coffee along with temperature (feelsLikeC) and cloud coverage (cloudcover)
-
-By using the seaborn library for visualization, we get the following results below.
+A linear plot is effective in identifying correlations between two variables. For this analysis, the total value of coffee along with temperature (feelsLikeC) and cloud coverage (cloudcover) were plotted.
 
 ```python
 sb.pairplot(final, x_vars=['feelsLikeC'], y_vars='t_total_product_value', size=7,
@@ -205,15 +212,10 @@ plt.title('Coffee Purchased(Product Value) & Temperature(Feels Like C)')
 
 <img src="{{ site.url }}{{ site.baseurl }}/images/CoffePurchasedTempLin.JPG" alt="Final Data Frame For Coffee">
 
-
-For cloud coverage:
-
-<img src="{{ site.url }}{{ site.baseurl }}/images/CoffeePurchasedCloudCoverageLin.JPG" alt="Final Data Frame For Coffee">
-
-Indeed we can see the regresional relationship between the two variables. However, due to the high varience of the data, using a linear method to draw observations from the data is not effective. With that being said, we need to observe the characteristic of every data point within the data. If we can identify what makes each data point particular, we can then group them and from the groupings we can then draw more a more effective analysis.
+With the linear analysis, it is possible to identify that there is a negative correlation with temperature and total value of coffee purchased and a slightly positive correlation with respect to cloud coverage. However, due to the high variance of data, it is not possible to draw an effective analysis solely on these two plots alone.
 
 ## Second: Plot the data by group
 
-By plotting each data point, or day by weather type, we can have a better illustration to see how it behaves. As shown, consumers tend to spend more on coffee when it is cold/cloudy versus when it is warm.
+Because we indexed (organized) the data points by date, each plot is particular due to the different weather observations. Therefor, each plotted point on the within the above analysis should be treated as so. In the illustration below, each data point is characterized by the type of weather consumers experienced on that particular day in relation to the total value of coffee they purchased.
 
 <img src="{{ site.url }}{{ site.baseurl }}/images/ClusterWeatherCoffee.JPG" alt="Final Data Frame For Coffee">
