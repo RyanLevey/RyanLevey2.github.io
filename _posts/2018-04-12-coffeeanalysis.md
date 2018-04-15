@@ -171,7 +171,7 @@ final.mildcloudy = final.mildcloudy.astype(int)
 
 ```
 ### Dummy Variables
-<img src="{{ site.url }}{{ site.baseurl }}/images/weather_1Uloc.JPG" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/images/DummyVar1.JPG" alt="">
 
 Lastly, the next objective is to combine the four weather columns into a single column. To do so, the Boolean values must be differentiated. This was done by assigning different integers to different types of weather. After assigning each weather type an integer, all features (columns) were added to the weather column and converted to strings for transparency.
 
