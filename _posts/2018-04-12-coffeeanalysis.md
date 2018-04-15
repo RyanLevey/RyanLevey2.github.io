@@ -210,7 +210,7 @@ plt.title('Coffee Purchased(Product Value) & Temperature(Feels Like C)')
 
 ```
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/CoffePurchasedTempLin.JPG" alt="Final Data Frame For Coffee">
+<img src="{{ site.url }}{{ site.baseurl }}/images/TempandCloud.jpg" alt="Final Data Frame For Coffee">
 
 With the linear analysis, it is possible to identify that there is a negative correlation with temperature and total value of coffee purchased and a slightly positive correlation with respect to cloud coverage. However, due to the high variance of data, it is not possible to draw an effective analysis solely on these two plots alone.
 
