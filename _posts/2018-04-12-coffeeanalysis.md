@@ -216,6 +216,10 @@ With the linear analysis, it is possible to identify that there is a negative co
 
 ## Second: Plot the data by group
 
-Because we indexed (organized) the data points by date, each plot is particular due to the different weather observations. Therefor, each plotted point on the within the above analysis should be treated as so. In the illustration below, each data point is characterized by the type of weather consumers experienced on that particular day in relation to the total value of coffee they purchased.
+Because the data was indexed (organized) by date, each plot is particular due to the different weather observations. Therefor, each plotted point on the within the above analysis should be treated as so. In the illustration below, each data point is characterized by the type of weather consumers experienced on that particular day in relation to the total value of coffee they purchased.
 
 <img src="{{ site.url }}{{ site.baseurl }}/images/ClusterWeatherCoffee.JPG" alt="Final Data Frame For Coffee">
+
+# Conclusion
+
+As clearly shown, it seems that consumers spend more on coffee on colder/cloudy days in comparison to warmer counter part. However, one inefficiency to note is that this data was taken during the months of September to March. Thus, it is given that there will be a higher volume of colder days in comparison to warmer days. But given how the data points behave and the way they cluster, it is possible to say with confidence that consumers spend more on coffee when it is colder/more cloudy in comparison to warmer/clear conditions.
