@@ -1,5 +1,5 @@
 ---
-title: "Suburbia Assessment: The use of Alternative Data to Identify Purchasing Behavior"
+title: "Assignment: The use of Alternative Data to Identify Purchasing Behavior"
 date: 2018-04-12
 tags: [data science, data analysis, data visualization]
 header:
@@ -7,9 +7,9 @@ header:
 excerpt: "The Relationship between weather and value of coffee purchased"
 ---
 
-# Company Profile: Suburbia
+# Background
 
-Suburbia is a start up based in Amsterdam that utilizes data from a variety of sources in effort to generate better insights for decision makers. Instead of using traditional sources such as industrial reports, and stock prices, Suburbia uses data from sources such as point of sale (POS), real estate, and a variety of other sources depending on the situation at hand.
+This assignment was conducted for a small start up based in Amsterdam that utilizes data from a variety of sources in effort to generate better insights for decision makers. Instead of using traditional sources such as industrial reports, and stock prices, this start up uses data from sources such as point of sale (POS), real estate, and a variety of other sources depending on the situation at hand.
 
 For this assignment, the task was to develop an analysis for coffee sales (total product value sold) within the Utrecht area. The analysis could be conducted by comparing a variety of data relative to the euro amount of coffee sales. Because of the nature in the way coffee is marketed, companies are not only selling the coffee itself, but the ambiance associated with it. In effort to demonstrate this ambiance, coffee analyzed with the weather in the Utrecht.
 
@@ -82,7 +82,7 @@ As seen above, the date feature (column) for both data frames are not organized 
 After the data is sorted and organized, another element to be address is the high number of observations (rows) within the weather data set. Because we only have data from September 10th 2017 to March 1st 2017, the .loc function is used to filter weather dates within the timeline that we have for retail
 
 ```python
-    weather_1U_retail = weather_1U_retail.loc['2017-09-10':'2018-08-01',:]
+    weather_1U_retail = weather_1U_retail.loc['2017-09-10':'2018-03-01',:]
     weather_1U_retail.head()
 
 
