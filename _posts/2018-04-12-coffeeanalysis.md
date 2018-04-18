@@ -1,5 +1,5 @@
 ---
-title: "Assignment: The use of Alternative Data to Identify Purchasing Behavior"
+title: "Assignment: The Use of Alternative Data to Identify Purchasing Behavior"
 date: 2018-04-12
 tags: [data science, data analysis, data visualization]
 header:
