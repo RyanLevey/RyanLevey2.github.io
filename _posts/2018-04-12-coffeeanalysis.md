@@ -9,9 +9,9 @@ excerpt: "The Relationship between weather and value of coffee purchased"
 
 # Background
 
-This assignment was conducted for a small start up based in Amsterdam that utilizes data from a variety of sources in effort to generate better insights for decision makers. Instead of using traditional sources such as industrial reports, and stock prices, this start up uses data from sources such as point of sale (POS), real estate, and a variety of other sources depending on the situation at hand.
+This assignment was conducted for a small start up based in Amsterdam that utilizes data from a variety of sources such as point of sale (POS), real estate, and a variety of other sources in effort to generate better insights for decision makers.
 
-For this assignment, the task was to develop an analysis for coffee sales (total product value sold) within the Utrecht area. The analysis could be conducted by comparing a variety of data relative to the euro amount of coffee sales. Because of the nature in the way coffee is marketed, companies are not only selling the coffee itself, but the ambiance associated with it. In effort to demonstrate this ambiance, coffee analyzed with the weather in the Utrecht.
+For this assignment, the task was to develop an analysis for coffee sales (total product value sold) within the Utrecht area. The analysis could be conducted by comparing a variety of data relative to the euro amount of coffee sales. Because of the nature in the way coffee is marketed, companies are not only selling the coffee itself, but the ambiance associated with it. In effort to demonstrate this ambiance, coffee was analyzed with the weather in the Utrecht area.
 
 # Step 1: Analyze/Import the Data  
 
@@ -68,7 +68,7 @@ After importing the libraries, data, and understanding the significance of the f
 
 # Step 2: Cleaning/Manipulating the Data
 
-In order to analyze the two data frames, the two need to be aligned (aka: indexed) to provide better organization and transparency. Essentially, indexing the two data frames results in organizing the two data frames by a common feature (in this case dates).
+In order to analyze the two data frames, the two need to be aligned (aka: indexed) to provide better organization and transparency. Essentially, indexing the two data frames results in organizing the two by a common feature (in this case dates is the common feature).
 
 As seen above, the date feature (column) for both data frames are not organized in any order. In order to organize the two, the pd.to_datetime function was used to convert the dates into datetime format and ordered by the .sort_values function.
 
@@ -150,7 +150,7 @@ final = weather_1U_retail.join(rFinalCoffee, how='outer')
 final.dropna(how='any')
 
 ```
-With the clean data, it is possible to further manipulate the data to illustrate what weather consumers experienced on a particular day. More specifically, a logic needs to be develop in order to define what is a cold/mild day or a clear/cloudy day. This can be conducted by generating four new columns (coldclear, coldcloudy, mildclear, mildcloudy) which Boolean values (True/False, 1 and 0) are assigned in each column based upon the conditions of other features such as feelsLikeC and cloud cover.
+With the clean data, further manipulation is needed in order to illustrate what weather consumers experienced on a particular day. More specifically, a logic needs to be develop in order to define what is a cold/mild day or a clear/cloudy day. This can be conducted by generating four new columns (coldclear, coldcloudy, mildclear, mildcloudy) which Boolean values (True/False, 1 and 0) are assigned in each column based upon the conditions of other features such as feelsLikeC and cloud cover.
 
 In effort to effectively illustrate the “ambiance” that the consumer was experiencing, the feelsLikeC and cloudcover features (columns) were used. Yet again, the goal of this analysis is to determine what experience (ambiance) that encourages consumers to spend money on coffee.
 
@@ -173,7 +173,7 @@ final.mildcloudy = final.mildcloudy.astype(int)
 ### Dummy Variables
 <img src="{{ site.url }}{{ site.baseurl }}/images/DummyVar1.JPG" alt="">
 
-Lastly, the next objective is to combine the four weather columns into a single column. To do so, the Boolean values must be differentiated. This was done by assigning different integers to different types of weather. After assigning each weather type an integer, all features (columns) were added to the weather column and converted to strings for transparency.
+Lastly, the next objective is to combine the four weather features into a single column. To do so, the Boolean values must be differentiated. This was done by assigning different integers to different types of weather. After assigning each weather type an integer, all features (columns) were added to the weather column and converted to strings for transparency.
 
 ```python
 
@@ -216,10 +216,10 @@ With the linear analysis, it is possible to identify that there is a negative co
 
 ## Second: Plot the data by group
 
-Because the data was indexed (organized) by date, each plot is particular due to the different weather observations. Therefor, each plotted point on the within the above analysis should be treated as so. In the illustration below, each data point is characterized by the type of weather consumers experienced on that particular day in relation to the total value of coffee they purchased.
+Because the data was indexed (organized) by date, each plot is particular due to the different weather observations. Therefor, each plotted point on the within the above analysis should be treated as so. In the illustration below, each data point is characterized by the type of weather consumers experienced from September to March in relation to the total value of coffee they purchased.
 
 <img src="{{ site.url }}{{ site.baseurl }}/images/ClusterWeatherCoffee.JPG" alt="Final Data Frame For Coffee">
 
 # Conclusion
 
-As clearly shown, it seems that consumers spend more on coffee on colder/cloudy days in comparison to warmer counter part. However, one inefficiency to note is that this data was taken during the months of September to March. Thus, it is given that there will be a higher volume of colder days in comparison to warmer days. But given how the data points behave and the way they cluster, it is possible to say with confidence that consumers spend more on coffee when it is colder/more cloudy in comparison to warmer/clear conditions.
+As clearly shown, it seems that consumers spend more on coffee on colder/cloudy days in comparison to the warmer counter part. However, one inefficiency to note is that this data was taken during the months of September to March. Thus, it is given that there will be a higher volume of colder days in comparison to warmer days. But given how the data points behave and the way they cluster, it is possible to say with confidence that consumers spend more on coffee when it is colder/more cloudy in comparison to warmer/clear conditions.
